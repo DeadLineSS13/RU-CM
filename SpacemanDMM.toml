@@ -1,0 +1,8 @@
+[display]
+error_level = "hints"
+
+[langserver]
+dreamchecker = true
+
+[debugger]
+engine = "auxtools"

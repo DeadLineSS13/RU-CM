@@ -1,0 +1,30 @@
+# The format of this document is the person's ckey followed by their role permissions.
+# You must list all permissions for a single ckey using one line.
+
+# Casing does not matter, spacing does not matter, and underscores do not matter. 
+# +Y_aut j a El_DER will be converted into yautjaelder.
+# You may add any of the possible roles below, using different names as indicated.
+# Adding two or more of the same role will not matter.
+# A lot of the defines are just placeholders for right now.
+
+######################################################
+# YAUTJA FLAGS
+# +Yautja
+# +YautjaElder
+# +YautjaCouncil
+# +YautjaLeader
+# COMMANDER FLAGS
+# +Commander
+# +CommanderCouncil
+# +CommanderLeader
+# SYNTHETIC FLAGS
+# +Synthetic
+# +SyntheticCouncil
+# +SyntheticLeader
+# GIVES ALL WHITELISTS (NOT INCLUDING COUNCIL/LEADER)
+# +All 
+# GIVES ALL WHITELISTS
+# +Everything
+#######################################################
+
+#Your_name_here				+All

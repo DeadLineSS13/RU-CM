@@ -1,0 +1,30 @@
+#ignore misc BYOND files
+Thumbs.db
+*.log
+*.int
+*.rsc
+*.rej
+*.dmb
+*.lk
+*.backup
+*.db
+*.db-shm
+*.db-wal
+data/
+cfg/
+!cfg/.keep
+tmp/
+dmdoc/
+tools/Runtime Condenser/Input.txt
+tools/Runtime Condenser/Output.txt
+sound/music/*.ogg
+sound/music/walkman/*/*.ogg
+sound/music/walkman/*.txt
+icons/custom/*
+maps/**/backup
+*.before
+__pycache__
+test_environment.txt
+*.json
+*.vscode/*
+!/.vscode/extensions.json
