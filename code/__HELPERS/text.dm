@@ -16,11 +16,11 @@
 //Simply removes < and > and limits the length of the message
 /proc/strip_html_simple(var/t,var/limit=MAX_MESSAGE_LEN)
 	var/list/strip_chars = list("<",">")
-	t = copytext(t,1,limit)
+	t = copytext_char(t,1,limit)
 	for(var/char in strip_chars)
 		var/index = findtext(t, char)
 		while(index)
-			t = copytext(t, 1, index) + copytext(t, index+1)
+			t = copytext_char(t, 1, index) + copytext_char(t, index+1)
 			index = findtext(t, char)
 	return t
 
@@ -49,12 +49,12 @@
 //Runs sanitize and strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
 /proc/strip_html(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
+	return copytext_char((sanitize(strip_html_simple(t))),1,limit)
 
 //Runs byond's sanitization proc along-side strip_html_simple
 //I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
 /proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
-	return copytext((html_encode(strip_html_simple(t))),1,limit)
+	return copytext_char((html_encode(strip_html_simple(t))),1,limit)
 
 
 //Returns null if there is any bad text in the string
@@ -142,7 +142,7 @@
 		return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == 1)
-		t_out = copytext(t_out,1,length(t_out))	//removes the last character (in this case a space)
+		t_out = copytext_char(t_out,1,length(t_out))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
 		if(cmptext(t_out,bad_name))
@@ -176,14 +176,14 @@
 /proc/trim_left(text)
 	for (var/i in 1 to length(text))
 		if (text2ascii(text, i) > 32)
-			return copytext(text, i)
+			return copytext_char(text, i)
 	return ""
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
 	for (var/i in length(text) to 1 step -1)
 		if (text2ascii(text, i) > 32)
-			return copytext(text, 1, i + 1)
+			return copytext_char(text, 1, i + 1)
 
 	return ""
 
@@ -193,7 +193,7 @@
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(var/t as text)
-	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2)
 
 /proc/stringpercent(var/text,character = "*")
 //This proc returns the number of chars of the string that is the character
@@ -202,7 +202,7 @@
 		return 0
 	var/count = 0
 	for(var/i = 1, i <= length(text), i++)
-		var/a = copytext(text,i,i+1)
+		var/a = copytext_char(text,i,i+1)
 		if(a == character)
 			count++
 	return count
@@ -210,7 +210,7 @@
 /proc/reverse_text(var/text = "")
 	var/new_text = ""
 	for(var/i = length(text); i > 0; i--)
-		new_text += copytext(text, i, i+1)
+		new_text += copytext_char(text, i, i+1)
 	return new_text
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
@@ -222,7 +222,7 @@ proc/TextPreview(var/string,var/len=40)
 		else
 			return string
 	else
-		return "[copytext(string, 1, 37)]..."
+		return "[copytext_char(string, 1, 37)]..."
 
 proc/strip_improper(input_text)
 	return replacetext(replacetext(input_text, "\proper", ""), "\improper", "")
@@ -254,9 +254,9 @@ proc/strip_improper(input_text)
 	if(!next_space)	//trailing bs
 		return string
 
-	var/base = next_backslash == 1 ? "" : copytext(string, 1, next_backslash)
-	var/macro = lowertext(copytext(string, next_backslash + 1, next_space))
-	var/rest = next_backslash > leng ? "" : copytext(string, next_space + 1)
+	var/base = next_backslash == 1 ? "" : copytext_char(string, 1, next_backslash)
+	var/macro = lowertext(copytext_char(string, next_backslash + 1, next_space))
+	var/rest = next_backslash > leng ? "" : copytext_char(string, next_space + 1)
 
 	//See http://www.byond.com/docs/ref/info.html#/DM/text/macros
 	switch(macro)
